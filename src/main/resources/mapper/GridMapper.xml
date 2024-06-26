@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stnInfotech.grid_layout.repository.GridRepository">
+    <select id="getLayouts" resultType="stnInfotech.grid_layout.dto.GridDTO">
+        SELECT id AS i, X AS `x`,Y AS `y`, height AS h, width AS w FROM stn_grid;
+    </select>
+
+    <update id="updateLayout" parameterType="stnInfotech.grid_layout.dto.GridDTO">
+        update stn_grid set x = #{x}, y = #{y}, width = #{w}, height = #{h} where id = #{i}
+    </update>
+
+
+
+    <!--    <delete id="deleteLayoutsByBreakpoint" parameterType="string">-->
+<!--        DELETE FROM grid_layout WHERE breakpoint = #{breakpoint}-->
+<!--    </delete>-->
+</mapper>
