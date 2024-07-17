@@ -5,16 +5,28 @@
 
 <mapper namespace="stnInfotech.grid_layout.repository.GridRepository">
     <select id="getLayouts" resultType="stnInfotech.grid_layout.dto.GridDTO">
-        SELECT id AS i, X AS `x`,Y AS `y`, height AS h, width AS w FROM stn_grid;
+        SELECT id AS i, X AS `x`,Y AS `y`, height AS h
+             , width AS w , minWidth AS minW , maxWidth AS maxW
+             , minHeight AS minH, maxHeight AS maxH, static AS isStatic, chartType FROM stn_grid;
+
     </select>
 
     <update id="updateLayout" parameterType="stnInfotech.grid_layout.dto.GridDTO">
-        update stn_grid set x = #{x}, y = #{y}, width = #{w}, height = #{h} where id = #{i}
+        update stn_grid set x = #{x}, y = #{y}, width = #{w}, height = #{h} where id = #{i};
     </update>
+
+    <insert id="insertLayout" parameterType="stnInfotech.grid_layout.dto.GridDTO">
+        INSERT INTO stn_grid(id,x,y,height,width,chartType) VALUES(#{i},#{x},#{y},#{h},#{w},#{chartType});
+    </insert>
+
+    <delete id="deleteLayout" parameterType="java.lang.String">
+        DELETE FROM stn_grid WHERE id = #{i};
+    </delete>
+
 
 
 
     <!--    <delete id="deleteLayoutsByBreakpoint" parameterType="string">-->
 <!--        DELETE FROM grid_layout WHERE breakpoint = #{breakpoint}-->
-<!--    </delete>-->
+<!--        </delete>-->
 </mapper>

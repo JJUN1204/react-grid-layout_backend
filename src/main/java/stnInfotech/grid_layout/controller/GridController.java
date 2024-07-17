@@ -29,4 +29,18 @@ public class GridController {
         System.out.println(gridDTOList);
         return ResponseEntity.ok(gridService.saveLayouts(gridDTOList));
     }
+
+    @PostMapping("/generateLayouts")
+    public ResponseEntity<Result> generateLayouts(
+           @RequestBody GridDTO gridDTO
+            ){
+        //GridDTO gridDTO = new GridDTO(i,x,y,w,h,null,null,null,null,null);
+        return ResponseEntity.ok(gridService.insertLayout(gridDTO));
+    }
+
+    @DeleteMapping("/deleteLayout")
+    public ResponseEntity<Result> deleteLayout(@RequestParam("i") String i){
+        System.out.println(i);
+        return ResponseEntity.ok(gridService.deleteLayout(i));
+    }
 }

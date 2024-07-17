@@ -25,12 +25,40 @@ public class GridServiceImpl implements GridService {
     }
 
     @Override
-    @Transactional
-    public Result saveLayouts(List<GridDTO> gridDTOList) {
-        for (GridDTO gridDTO : gridDTOList) {
-            System.out.println(gridDTO);
-            gridRepository.updateLayout(gridDTO);
+    public Result deleteLayout(String i) {
+        try {
+            gridRepository.deleteLayout(i);
+            return new Result("DELETE_COMPLETE");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result("error");
         }
-        return new Result("UPDATE_COMPLETE");
+    }
+
+    @Override
+    public Result saveLayouts(List<GridDTO> gridDTOList) {
+        try {
+            for (GridDTO gridDTO : gridDTOList) {
+                System.out.println(gridDTO);
+                gridRepository.updateLayout(gridDTO);
+            }
+            return new Result("UPDATE_COMPLETE");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result("error");
+        }
+
+    }
+
+    @Override
+    public Result insertLayout(GridDTO gridDTO) {
+        try{
+            gridRepository.insertLayout(gridDTO);
+            return new Result("INSERT_COMPLETE");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result("error");
+        }
+
     }
 }
